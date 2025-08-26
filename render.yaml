@@ -7,7 +7,6 @@ services:
     startCommand: ""
     dockerCommand: sh -c "npx directus bootstrap && npx directus start"
     dockerfilePath: ./Dockerfile
-    port: 8055
     envVars:
       - key: DB_CLIENT
         value: pg
@@ -48,6 +47,8 @@ services:
         value: "true"
       - key: CORS_ORIGIN
         value: https://directus-blueprint.vercel.app
+      - key: PORT
+        value: "8055"
 
 databases:
   - name: directus-db
