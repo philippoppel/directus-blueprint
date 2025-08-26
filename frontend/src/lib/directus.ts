@@ -26,7 +26,7 @@ interface Collections {
   gallery: GalleryItem[];
 }
 
-const directus = createDirectus<Collections>(process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055')
+const directus = createDirectus<Collections>(process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://directus-6t0d.onrender.com')
   .with(rest());
 
 export { directus };

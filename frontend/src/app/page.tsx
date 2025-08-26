@@ -177,7 +177,7 @@ export default async function Home() {
             </p>
             <div className="mt-4 flex justify-center space-x-6">
               <a 
-                href="http://localhost:8055" 
+                href="https://directus-6t0d.onrender.com/admin" 
                 target="_blank"
                 className="text-gray-300 hover:text-white"
               >
