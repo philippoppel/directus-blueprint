@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:15
+    container_name: directus-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: directus
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directus
+    volumes:
+      - directus_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  directus:
+    image: directus/directus:latest
+    container_name: directus-cms
+    restart: unless-stopped
+    depends_on:
+      - database
+    ports:
+      - "8055:8055"
+    volumes:
+      - directus_uploads:/directus/uploads
+    environment:
+      KEY: '255d861b-5ea1-5996-9aa3-922530ec40b1'
+      SECRET: '6116487b-cda1-52c2-b5b5-c8022c45e263'
+      
+      DB_CLIENT: 'pg'
+      DB_HOST: 'database'
+      DB_PORT: '5432'
+      DB_DATABASE: 'directus'
+      DB_USER: 'directus'
+      DB_PASSWORD: 'directus'
+      
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'directus123'
+      
+      PUBLIC_URL: 'http://localhost:8055'
+      
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'http://localhost:3000'
+
+volumes:
+  directus_data:
+  directus_uploads:

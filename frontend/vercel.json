@@ -1,0 +1,12 @@
+{
+  "name": "directus-blueprint-frontend",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_DIRECTUS_URL": "http://localhost:8055"
+  }
+}
