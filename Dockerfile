@@ -1,8 +1,6 @@
+# ./Dockerfile
 FROM directus/directus:latest
+ENV NODE_ENV=production
 
-# (optional) hilft lokalen Tools, hat auf Render keine Wirkung
-EXPOSE 8055
-
-# Beim ersten Start DB initialisieren, dann Server starten
-# Das offizielle Image hat already einen EntryPoint; wir überschreiben nur CMD.
-CMD ["sh", "-c", "npx directus bootstrap && npx directus start"]
+# Wichtig: Shell-Form, damit zur Laufzeit $RENDER_EXTERNAL_URL verfügbar ist.
+CMD ["sh","-lc","PUBLIC_URL=\"$RENDER_EXTERNAL_URL\" npx directus bootstrap && PUBLIC_URL=\"$RENDER_EXTERNAL_URL\" npx directus start"]
