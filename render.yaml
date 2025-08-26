@@ -5,6 +5,9 @@ services:
     plan: free
     buildCommand: ""
     startCommand: ""
+    dockerCommand: sh -c "npx directus bootstrap && npx directus start"
+    dockerfilePath: ./Dockerfile
+    port: 8055
     envVars:
       - key: DB_CLIENT
         value: pg

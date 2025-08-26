@@ -1,12 +1,10 @@
 FROM directus/directus:latest
 
-# Copy any custom extensions or configurations if needed
-# COPY ./extensions /directus/extensions
+# Set working directory
+WORKDIR /directus
 
-# The base image already sets up everything we need
-# Environment variables will be provided by Render
-
+# Expose port 8055
 EXPOSE 8055
 
-# Use the default command from the base image
-CMD ["npx", "directus", "start"]
+# Initialize database and start directus
+CMD ["sh", "-c", "npx directus bootstrap && npx directus start"]
