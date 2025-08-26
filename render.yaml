@@ -4,7 +4,7 @@ services:
     runtime: docker
     plan: free
     buildCommand: ""
-    startCommand: ""
+    startCommand: "npx directus bootstrap && npx directus start"
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DB_CLIENT
