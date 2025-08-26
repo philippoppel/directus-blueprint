@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: directus
+    runtime: docker
+    plan: free
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: DB_CLIENT
+        value: pg
+      - key: DB_HOST
+        fromDatabase:
+          name: directus-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: directus-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: directus-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: directus-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: directus-db
+          property: password
+      - key: KEY
+        generateValue: true
+      - key: SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@example.com
+      - key: ADMIN_PASSWORD
+        value: directus123
+      - key: PUBLIC_URL
+        fromService:
+          type: web
+          name: directus
+          property: host
+      - key: CORS_ENABLED
+        value: "true"
+      - key: CORS_ORIGIN
+        value: https://directus-blueprint.vercel.app
+
+databases:
+  - name: directus-db
+    databaseName: directus
+    user: directus
+    plan: free
