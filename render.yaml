@@ -5,7 +5,7 @@ services:
     plan: free
     buildCommand: ""
     startCommand: ""
-    dockerCommand: sh -c "node_modules/.bin/directus bootstrap && node_modules/.bin/directus start"
+    dockerCommand: sh -c "directus bootstrap && directus start"
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DB_CLIENT
