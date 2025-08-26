@@ -3,9 +3,10 @@ services:
     name: directus
     runtime: docker
     plan: free
-    buildCommand: ""
-    startCommand: "npx directus bootstrap && npx directus start"
     dockerfilePath: ./Dockerfile
+
+    # Wichtig: Directus soll seine öffentliche URL kennen.
+    # Auf Render kannst du direkt die Service-URL injizieren:
     envVars:
       - key: DB_CLIENT
         value: pg
@@ -29,25 +30,34 @@ services:
         fromDatabase:
           name: directus-db
           property: password
+
       - key: KEY
         generateValue: true
       - key: SECRET
         generateValue: true
+
       - key: ADMIN_EMAIL
         value: admin@example.com
       - key: ADMIN_PASSWORD
         value: directus123
+
+      # Hier bitte "url" statt "host", damit https://... reinkommt.
       - key: PUBLIC_URL
         fromService:
           type: web
           name: directus
-          property: host
+          property: url
+
       - key: CORS_ENABLED
         value: "true"
       - key: CORS_ORIGIN
-        value: https://directus-blueprint.vercel.app
-      - key: PORT
-        value: "8055"
+        value: https://directus-blueprint.vercel.app,http://localhost:3000
+
+    # Optional aber sehr empfehlenswert (Uploads persistent):
+    disks:
+      - name: uploads
+        mountPath: /directus/uploads
+        sizeGB: 1
 
 databases:
   - name: directus-db

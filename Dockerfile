@@ -1,6 +1,8 @@
 FROM directus/directus:latest
 
-# Expose port 8055
+# (optional) hilft lokalen Tools, hat auf Render keine Wirkung
 EXPOSE 8055
 
-# Use default entrypoint from base image
+# Beim ersten Start DB initialisieren, dann Server starten
+# Das offizielle Image hat already einen EntryPoint; wir überschreiben nur CMD.
+CMD ["sh", "-c", "npx directus bootstrap && npx directus start"]
