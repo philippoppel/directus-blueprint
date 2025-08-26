@@ -38,10 +38,10 @@ services:
       ADMIN_EMAIL: 'admin@example.com'
       ADMIN_PASSWORD: 'directus123'
       
-      PUBLIC_URL: 'http://localhost:8055'
+      PUBLIC_URL: '${PUBLIC_URL:-http://localhost:8055}'
       
       CORS_ENABLED: 'true'
-      CORS_ORIGIN: 'http://localhost:3000'
+      CORS_ORIGIN: 'https://directus-blueprint.vercel.app,http://localhost:3000'
 
 volumes:
   directus_data:
