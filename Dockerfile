@@ -7,4 +7,4 @@ WORKDIR /directus
 EXPOSE 8055
 
 # Initialize database and start directus
-CMD ["sh", "-c", "npx directus bootstrap && npx directus start"]
+CMD ["sh", "-c", "node_modules/.bin/directus bootstrap && node_modules/.bin/directus start"]
