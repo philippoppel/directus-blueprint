@@ -53,12 +53,6 @@ services:
       - key: CORS_ORIGIN
         value: https://directus-blueprint.vercel.app,http://localhost:3000
 
-    # Optional aber sehr empfehlenswert (Uploads persistent):
-    disks:
-      - name: uploads
-        mountPath: /directus/uploads
-        sizeGB: 1
-
 databases:
   - name: directus-db
     databaseName: directus
