@@ -5,8 +5,13 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
 
-    # Wichtig: Directus soll seine öffentliche URL kennen.
-    # Auf Render kannst du direkt die Service-URL injizieren:
+    # WICHTIG: PUBLIC_URL aus RENDER_EXTERNAL_URL zur Laufzeit setzen
+    # (Render liefert RENDER_EXTERNAL_URL automatisch).
+    startCommand: >
+      export PUBLIC_URL="$RENDER_EXTERNAL_URL" &&
+      npx directus bootstrap &&
+      npx directus start
+
     envVars:
       - key: DB_CLIENT
         value: pg
@@ -41,13 +46,7 @@ services:
       - key: ADMIN_PASSWORD
         value: directus123
 
-      # Hier bitte "url" statt "host", damit https://... reinkommt.
-      - key: PUBLIC_URL
-        fromService:
-          type: web
-          name: directus
-          property: url
-
+      # CORS optional anpassen
       - key: CORS_ENABLED
         value: "true"
       - key: CORS_ORIGIN
